@@ -70,7 +70,7 @@ namespace BasicCSharp
             theDelegate();
 
             // change variable value to fix test.
-            var expectedTrace = new string[] {};
+            var expectedTrace = new string[] { "MulticastDelegateDemoClass.OneMethod() called", "MulticastDelegateDemoClass.AnotherMethod() called" };
 
             Assert.Equal(expectedTrace, demoObject.Trace);
         }
