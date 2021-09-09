@@ -36,7 +36,7 @@ namespace MyMvc.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=aspnet-MvcMovie;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\Movies.mdf");
+            optionsBuilder.UseSqlServer(@"Data Source=192.168.10.10;Database=aspnet-MvcMovie;User ID=sa;Password=a12345678!");
         }
     }
 }

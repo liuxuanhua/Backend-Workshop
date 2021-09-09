@@ -23,19 +23,30 @@ namespace MyMvc.Controllers
             var genreLst = new List<string>();
 
             var genreQry = from d in db.Movies
-                orderby d.Genre
-                select d.Genre;
+                           orderby d.Genre
+                           select d.Genre;
 
             genreLst.AddRange(genreQry.Distinct());
             ViewBag.MovieGenre = new SelectList(genreLst);
 
             // # homework 3 -- read movies data from loacl-db,please use linq
 
-            
-            // # homework 7 -- filte movies data by conditions
-            
 
-            return View();
+
+            // # homework 7 -- filte movies data by conditions
+
+            IQueryable<Movie> searchQuery = db.Movies;
+            if (searchString != null && searchString.Trim().Length > 0)
+            {
+                searchQuery.Where(o => o.Title.Contains(searchString));
+            }
+            if (movieGenre != null && movieGenre.Trim().Length > 0)
+            {
+                searchQuery.Where(o => o.Rating.Equals(movieGenre));
+            }
+            var movies = searchQuery.OrderBy(o => o.Genre).ToList();
+
+            return View(movies);
         }
 
         [HttpPost]
@@ -76,6 +87,8 @@ namespace MyMvc.Controllers
             Movie movie)
         {
             // # homework 5 -- save data to loacl-db
+            db.Movies.Add(movie);          
+            db.SaveChanges();
 
             return View(movie);
         }
@@ -86,6 +99,11 @@ namespace MyMvc.Controllers
             // # homework 8 -- when you on Eidt site , you should see the movie info
             if (id == null)
             {
+                Movie movie = db.Movies.Find(id);
+                if(movie != null)
+                {
+                    return View(movie);
+                }
                 return new StatusCodeResult((int)HttpStatusCode.BadRequest);
             }
 
@@ -113,8 +131,16 @@ namespace MyMvc.Controllers
         {
             // # homework 9 -- find data by id 
             // when id is null ,return HttpStatusCode.BadRequest;
-            
-            
+            if (id == null)
+            {
+                Movie movie = db.Movies.Find(id);
+                if (movie == null)
+                {
+                    return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+                }
+                db.Movies.Remove(movie);
+                db.SaveChanges();
+            }
             return View();
         }
 

@@ -46,3 +46,7 @@ StyleCop.Cache
 */.vs/
 .vs/
 
+
+# system ignore
+.DS_Store
+
