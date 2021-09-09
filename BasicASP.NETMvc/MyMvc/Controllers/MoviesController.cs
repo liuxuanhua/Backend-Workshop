@@ -45,8 +45,9 @@ namespace MyMvc.Controllers
                 searchQuery.Where(o => o.Rating.Equals(movieGenre));
             }
             var movies = searchQuery.OrderBy(o => o.Genre).ToList();
+            ViewData["data"] = movies;
 
-            return View(movies);
+            return View();
         }
 
         [HttpPost]

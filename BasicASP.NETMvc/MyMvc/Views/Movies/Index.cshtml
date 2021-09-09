@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<MyMvc.Models.Movie>
 @{
     ViewBag.Title = "Index";
+    ViewBag.ReleaseDate = "ReleaseDate";
+    ViewBag.Genre = "Genre";
+    ViewBag.Price = "Price";
+    ViewBag.Rating = "Rating";
 }
 <h2>Movies</h2>
 <p>
@@ -16,6 +20,7 @@
         </p>
     }
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -36,10 +41,32 @@
 
         <th></th>
     </tr>
+
     @* # homework 2 -- show the movies on this site  *@
-   
-    
+    @foreach (MyMvc.Models.Movie item in (ViewData["data"] as IEnumerable<MyMvc.Models.Movie>))
+    {
+        <tr>
+            <th>
+                @item.Title
+            </th>
+            <th>
+                @item.ReleaseDate
+            </th>
+            <th>
+                @item.Genre
+            </th>
+            <th>
+                @item.Price
+            </th>
+            <th>
+                @item.Rating
+            </th>
+
+            <th></th>
+        </tr>
+    }
+
     @* # homework 6 -- add Edit,Details,Delete buttons every line and them shou link to action *@
-    
+
 
 </table>

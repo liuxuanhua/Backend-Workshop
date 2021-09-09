@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -40,8 +41,6 @@ namespace MyMvc
             services.AddEntityFrameworkSqlServer()
            .AddDbContext<Models.MovieDBContext>();
 
-
-
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
@@ -53,6 +52,8 @@ namespace MyMvc
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseStaticFiles();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -64,20 +65,22 @@ namespace MyMvc
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+           
 
             app.UseRouting();
 
             app.UseAuthorization();
             app.UseAuthentication();
 
+
             app.UseSession();
+
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=auth}/{action=login}");
             });
         }
     }
