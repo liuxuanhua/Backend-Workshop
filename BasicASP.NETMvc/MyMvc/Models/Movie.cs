@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace MyMvc.Models
 {
+
     public class Movie
     {
         public int ID { get; set; }
@@ -36,7 +38,8 @@ namespace MyMvc.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=192.168.10.10;Database=aspnet-MvcMovie;User ID=sa;Password=a12345678!");
+            var connectStr = AppConfigurtaionHelper.Configuration.GetConnectionString("MoviesDb");
+            optionsBuilder.UseSqlServer(connectStr);
         }
     }
 }

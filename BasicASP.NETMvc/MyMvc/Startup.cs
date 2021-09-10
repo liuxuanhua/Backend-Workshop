@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -38,17 +31,15 @@ namespace MyMvc
 
             services.AddDistributedMemoryCache();
 
-            services.AddEntityFrameworkSqlServer()
-           .AddDbContext<Models.MovieDBContext>();
+            services.AddEntityFrameworkSqlServer().AddDbContext<Models.MovieDBContext>();
 
             services.AddMvc().AddRazorRuntimeCompilation();
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromSeconds(180);
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

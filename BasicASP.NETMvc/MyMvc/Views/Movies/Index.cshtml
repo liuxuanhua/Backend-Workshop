@@ -62,14 +62,16 @@
             <td>
                 @item.Rating
             </td>
+
+            @* # homework 6 -- add Edit,Details,Delete buttons every line and them shou link to action *@
             <td>
-                @Html.ActionLink("Edit", "Edit",new { id = item.ID})|@Html.ActionLink("Details", "Details", new { id = item.ID })|@Html.ActionLink("Delete", "Delete",  new { id = item.ID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID })|@Html.ActionLink("Details", "Details", new { id = item.ID })|@Html.ActionLink("Delete", "Delete", new { id = item.ID })
             </td>
             <th></th>
         </tr>
     }
 
-    @* # homework 6 -- add Edit,Details,Delete buttons every line and them shou link to action *@
+    
 
 
 </table>

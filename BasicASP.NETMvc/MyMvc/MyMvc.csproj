@@ -15,7 +15,6 @@
     <None Remove="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
     <None Remove="xunit" />
     <None Remove="xunit.assert" />
-    <None Remove="Authorization\" />
     <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
   </ItemGroup>
   <ItemGroup>
@@ -23,7 +22,6 @@
     <Folder Include="Views\Auth\" />
     <Folder Include="Views\Movies\" />
     <Folder Include="Views\Shared\" />
-    <Folder Include="Authorization\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -35,5 +33,10 @@
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.assert" Version="2.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Authorization\Authenticate.cs" />
+    <Compile Remove="Controllers\HomeController.cs" />
+    <Compile Remove="Models\ErrorViewModel.cs" />
   </ItemGroup>
 </Project>

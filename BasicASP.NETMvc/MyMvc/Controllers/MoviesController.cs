@@ -87,9 +87,13 @@ namespace MyMvc.Controllers
             Movie movie)
         {
             // # homework 5 -- save data to loacl-db
-            db.Movies.Add(movie);          
-            db.SaveChanges();
-
+            if (ModelState.IsValid)
+            {
+                db.Movies.Add(movie);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            
             return View(movie);
         }
 
@@ -97,7 +101,7 @@ namespace MyMvc.Controllers
         public ActionResult Edit(int? id)
         {
             // # homework 8 -- when you on Eidt site , you should see the movie info
-            if (id == null)
+            if (id != null)
             {
                 Movie movie = db.Movies.Find(id);
                 if(movie != null)
@@ -131,15 +135,16 @@ namespace MyMvc.Controllers
         {
             // # homework 9 -- find data by id 
             // when id is null ,return HttpStatusCode.BadRequest;
-            if (id == null)
+            if (id != null)
             {
                 Movie movie = db.Movies.Find(id);
                 if (movie == null)
                 {
                     return new StatusCodeResult((int)HttpStatusCode.BadRequest);
                 }
-                db.Movies.Remove(movie);
-                db.SaveChanges();
+                //db.Movies.Remove(movie);
+                //db.SaveChanges();
+                return View(movie);
             }
             return View();
         }
