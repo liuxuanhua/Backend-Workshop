@@ -41,6 +41,8 @@ namespace MyMvc
             services.AddEntityFrameworkSqlServer()
            .AddDbContext<Models.MovieDBContext>();
 
+            services.AddMvc().AddRazorRuntimeCompilation();
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(10);

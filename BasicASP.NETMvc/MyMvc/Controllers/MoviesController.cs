@@ -30,22 +30,21 @@ namespace MyMvc.Controllers
             ViewBag.MovieGenre = new SelectList(genreLst);
 
             // # homework 3 -- read movies data from loacl-db,please use linq
-
+            var query = from p in db.Movies orderby p.Genre select p;
+            var dataList = query.ToList();
 
 
             // # homework 7 -- filte movies data by conditions
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                dataList = dataList.Where(o => o.Title.Contains(searchString.Trim())).ToList();
+            }
+            if (!string.IsNullOrEmpty(movieGenre))
+            {
+                dataList = dataList.Where(o => o.Genre.Equals(movieGenre.Trim())).ToList();
+            }
 
-            IQueryable<Movie> searchQuery = db.Movies;
-            if (searchString != null && searchString.Trim().Length > 0)
-            {
-                searchQuery.Where(o => o.Title.Contains(searchString));
-            }
-            if (movieGenre != null && movieGenre.Trim().Length > 0)
-            {
-                searchQuery.Where(o => o.Rating.Equals(movieGenre));
-            }
-            var movies = searchQuery.OrderBy(o => o.Genre).ToList();
-            ViewData["data"] = movies;
+            ViewData["data"] = dataList;
 
             return View();
         }
