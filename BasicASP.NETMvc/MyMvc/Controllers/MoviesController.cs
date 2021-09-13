@@ -44,9 +44,7 @@ namespace MyMvc.Controllers
                 dataList = dataList.Where(o => o.Genre.Equals(movieGenre.Trim())).ToList();
             }
 
-            ViewData["data"] = dataList;
-
-            return View();
+            return View(dataList);
         }
 
         [HttpPost]

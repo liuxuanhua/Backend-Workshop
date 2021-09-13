@@ -44,7 +44,8 @@
     </tr>
 
     @* # homework 2 -- show the movies on this site  *@
-    @foreach (MyMvc.Models.Movie item in (ViewData["data"] as IEnumerable<MyMvc.Models.Movie>))
+
+    @foreach (MyMvc.Models.Movie item in Model)
     {
         <tr>
             <td>
